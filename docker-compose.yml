@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    container_name: laravel-web-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:80"
+    volumes:
+      - .:/var/www/html
