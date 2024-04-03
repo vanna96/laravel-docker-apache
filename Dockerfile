@@ -30,20 +30,17 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # If .env file doesn't exist, copy .env.example to .env
 RUN if [ ! -f ".env" ]; then cp .env.example .env; fi
 
-# Install dependencies using Composer
-RUN composer update
-
-# Generate Laravel application key
-RUN php artisan key:generate
-
 # Append cron job directly to /etc/crontab
 RUN echo "* * * * * root php /var/www/html/artisan schedule:run >> /dev/null 2>&1" >> /etc/crontab
 
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
-# Start cron service and Apache server
-CMD service cron start && apache2ctl -D FOREGROUND
+# Configure Supervisor
+COPY supervisor/queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
+
+# Start Supervisor, cron service, and Apache server
+CMD service cron start && apache2ctl -D FOREGROUND && supervisord -c /etc/supervisor/conf.d/queue-worker.conf
 
 # Expose port 80
 EXPOSE 80

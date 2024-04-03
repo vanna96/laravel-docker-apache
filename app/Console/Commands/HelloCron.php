@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Jobs\TestJob;
 
 class HelloCron extends Command
 {
@@ -38,6 +39,7 @@ class HelloCron extends Command
     public function handle()
     {
         $this->info('Hello Cron!!');
+        TestJob::dispatch();
         info(1);
         return 1;
     }
