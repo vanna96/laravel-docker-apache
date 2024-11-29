@@ -21,6 +21,8 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    # volumes:
+    #   - ./path/to/your/database.sql:/docker-entrypoint-initdb.d/database.sql
 
   phpmyadmin:
     container_name: phpmyadmin

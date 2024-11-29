@@ -47,7 +47,8 @@ RUN chmod 664 /var/www/html/storage/logs/worker.log
 COPY supervisor/queue-worker.conf /etc/supervisor/conf.d/queue-worker.conf
 
 # Start Supervisor
-CMD supervisord -c /etc/supervisor/conf.d/queue-worker.conf && service cron start && apache2ctl -D FOREGROUND
+# CMD supervisord -c /etc/supervisor/conf.d/queue-worker.conf && service cron start && apache2ctl -D FOREGROUND
+CMD ["sh", "-c", "supervisord -c /etc/supervisor/conf.d/queue-worker.conf && service cron start && apache2ctl -D FOREGROUND"]
 
 # Expose port 80
 EXPOSE 80
