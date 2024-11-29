@@ -41,6 +41,24 @@
     <script src="{{ asset('assets/js/vendor/modernizr-3.7.1.min.js') }}"></script>
 
     <!-- Additional Head Content -->
+    <style>
+        @font-face {
+            font-family: "Koh Santepheap";
+            src: url("fonts/KohSantepheap-Regular.ttf") format("truetype");
+            font-weight: 100;
+        }
+
+        @font-face {
+            font-family: "Noto Sans";
+            src: url("fonts/NotoSans-Regular.ttf") format("truetype");
+            font-weight: 100 900; /* For variable font weights */
+        }
+
+        * {
+            font-family: sans-serif, "Koh Santepheap"; 
+            font-style: normal;
+        }
+    </style>
     @stack('head')
 </head>
 
